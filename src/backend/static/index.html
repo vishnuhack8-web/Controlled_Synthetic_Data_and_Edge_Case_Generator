@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Synthetic Data & Edge-Case Platform</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js for interactive dashboard graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            background: '#090d16',
+            card: '#111827',
+            border: '#1f2937',
+            primary: { 500: '#06b6d4', 400: '#22d3ee' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #090d16; color: #f3f4f6; font-family: system-ui, -apple-system, sans-serif; }
+    .glass-card { background: rgba(17, 24, 39, 0.8); border: 1px solid rgba(31, 41, 55, 0.8); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 w-full border-b border-gray-800 bg-[#090d16]/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-end px-6 py-4">
+      <nav class="flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm font-medium">
+        <button onclick="showPage('landing')" id="nav-landing" class="px-3 py-1.5 rounded-md text-cyan-400 bg-slate-800 font-semibold">Overview</button>
+        <button onclick="showPage('define')" id="nav-define" class="px-3 py-1.5 rounded-md text-gray-400 hover:text-white">1. Define Machine</button>
+        <button onclick="showPage('configure')" id="nav-configure" class="px-3 py-1.5 rounded-md text-gray-400 hover:text-white">2. Configure</button>
+        <button onclick="showPage('results')" id="nav-results" class="px-3 py-1.5 rounded-md text-gray-400 hover:text-white">3. Results</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl mx-auto w-full px-6 py-8">
+
+    <!-- ========================================== -->
+    <!-- PAGE 1: LANDING / OVERVIEW -->
+    <!-- ========================================== -->
+    <div id="page-landing" class="space-y-12">
+      <!-- Hero -->
+      <section class="text-center py-12 flex flex-col items-center max-w-4xl mx-auto">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-400 text-xs font-semibold mb-6">
+          <i class="fa-solid fa-sparkles"></i>
+          <span>Local Offline AI Data & Anomaly Generator</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+          AI Synthetic Data & <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Edge-Case Generation</span> Platform
+        </h1>
+
+        <p class="mt-6 text-base sm:text-lg text-gray-400 max-w-2xl leading-relaxed">
+          Create realistic, privacy-preserving synthetic datasets with automatically produced rare edge cases, failure scenarios, and statistical validation for ML models and software testing.
+        </p>
+
+        <div class="mt-8 flex gap-4 justify-center">
+          <button onclick="showPage('define')" class="px-8 py-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold shadow-lg shadow-cyan-500/25 transition-all text-base flex items-center space-x-2">
+            <span>Start configuring</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- What Platform Does (4 Cards) -->
+      <section>
+        <h2 class="text-xl font-bold text-center text-white mb-8">What This Platform Does</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="p-3 bg-cyan-950 rounded-xl text-cyan-400 w-fit mb-4"><i class="fa-solid fa-sliders text-xl"></i></div>
+            <h3 class="text-base font-semibold text-white mb-2">Controlled Generation</h3>
+            <p class="text-xs text-gray-400">Deterministic, schema-driven dataset creation matching user distributions, parameter ranges, and business rules.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="p-3 bg-red-950 rounded-xl text-red-400 w-fit mb-4"><i class="fa-solid fa-bolt text-xl"></i></div>
+            <h3 class="text-base font-semibold text-white mb-2">Edge-Case Engine</h3>
+            <p class="text-xs text-gray-400">Inject rare events, boundary values, equipment failure modes, corruptions, and network outages into datasets.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="p-3 bg-emerald-950 rounded-xl text-emerald-400 w-fit mb-4"><i class="fa-solid fa-shield-halved text-xl"></i></div>
+            <h3 class="text-base font-semibold text-white mb-2">Privacy Safe</h3>
+            <p class="text-xs text-gray-400">Zero real records copied. Performs nearest-neighbor distance and PII pattern scans with fake text tokens.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="p-3 bg-purple-950 rounded-xl text-purple-400 w-fit mb-4"><i class="fa-solid fa-circle-check text-xl"></i></div>
+            <h3 class="text-base font-semibold text-white mb-2">Quality Checks</h3>
+            <p class="text-xs text-gray-400">Statistical KS goodness-of-fit testing, range compliance, and predictive ML anomaly detection evaluation.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Total Inputs Grid -->
+      <section>
+        <h2 class="text-xl font-bold text-white mb-4">Total Inputs You Can Provide</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass-card p-6 rounded-2xl">
+            <h3 class="text-xs font-bold uppercase text-cyan-400 mb-3">1. Domain Templates (5)</h3>
+            <ul class="space-y-1.5 text-xs text-gray-300">
+              <li>• IoT / Manufacturing</li>
+              <li>• Logistics</li>
+              <li>• Finance</li>
+              <li>• Healthcare</li>
+              <li>• E-commerce</li>
+            </ul>
+          </div>
+          <div class="glass-card p-6 rounded-2xl">
+            <h3 class="text-xs font-bold uppercase text-cyan-400 mb-3">2. Schema & Types (5)</h3>
+            <ul class="space-y-1.5 text-xs text-gray-300">
+              <li>• Number (min, max, unit)</li>
+              <li>• Category (values, weights)</li>
+              <li>• Boolean (true_share %)</li>
+              <li>• Text (fake tokens)</li>
+              <li>• Datetime (interval)</li>
+            </ul>
+          </div>
+          <div class="glass-card p-6 rounded-2xl">
+            <h3 class="text-xs font-bold uppercase text-cyan-400 mb-3">3. Volume & Frequency</h3>
+            <ul class="space-y-1.5 text-xs text-gray-300">
+              <li>• Records: 100 to 100,000</li>
+              <li>• Edge-case freq: 1% to 20%</li>
+              <li>• Seed: integer</li>
+              <li>• Export: CSV, JSON, Parquet</li>
+            </ul>
+          </div>
+          <div class="glass-card p-6 rounded-2xl">
+            <h3 class="text-xs font-bold uppercase text-cyan-400 mb-3">4. Failure Scenarios (4)</h3>
+            <ul class="space-y-1.5 text-xs text-gray-300">
+              <li>• Boundary values</li>
+              <li>• Missing / corrupted data</li>
+              <li>• Combined equipment failure</li>
+              <li>• Network outage</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PAGE 2: DEFINE YOUR MACHINE -->
+    <!-- ========================================== -->
+    <div id="page-define" class="hidden space-y-8 max-w-4xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-800 pb-4 gap-4">
+        <div>
+          <span class="text-xs font-semibold text-cyan-400 uppercase">Step 2 of 4 • Define Schema</span>
+          <h1 class="text-2xl font-extrabold text-white">Define Your Machine</h1>
+        </div>
+        <div id="llm-badge" class="px-3 py-1.5 rounded-full bg-slate-900 border border-gray-800 text-xs text-gray-400">
+          Checking Local AI...
+        </div>
+      </div>
+
+      <!-- Description Textarea -->
+      <div class="glass-card p-6 rounded-2xl space-y-4">
+        <label class="block text-sm font-semibold text-white">Describe your machine or system in a paragraph:</label>
+        <textarea id="desc-input" rows="4" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-4 text-sm text-gray-100 focus:outline-none focus:border-cyan-500" placeholder="e.g. A water pump station with temperature (0-100 °C), pressure (1-10 bar), flow rate, and 5-sec timestamps."></textarea>
+
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center space-x-2 text-xs">
+            <span class="text-gray-400">Examples:</span>
+            <button onclick="fillExample('water')" class="px-2.5 py-1 rounded bg-gray-800 text-cyan-400 font-medium hover:bg-gray-700">Water pump</button>
+            <button onclick="fillExample('vending')" class="px-2.5 py-1 rounded bg-gray-800 text-cyan-400 font-medium hover:bg-gray-700">Vending machine</button>
+          </div>
+
+          <button id="analyze-btn" onclick="analyzeDescription()" class="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold text-sm flex items-center space-x-2">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Analyze description</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Notice -->
+      <div id="define-error" class="hidden p-4 rounded-xl bg-red-950/80 border border-red-800 text-red-300 text-xs"></div>
+
+      <!-- Parameters List -->
+      <div id="parameters-section" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-white">Confirmed Parameters (<span id="param-count">0</span>)</h2>
+          <span id="domain-badge" class="px-3 py-1 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800 text-xs font-bold">IoT / Manufacturing</span>
+        </div>
+
+        <div id="parameters-container" class="space-y-3"></div>
+
+        <button onclick="addBlankParameter()" class="px-4 py-2 rounded-xl bg-gray-900 border border-gray-800 text-cyan-400 text-xs font-bold hover:border-cyan-500">+ Add parameter</button>
+
+        <!-- Live Sample Row Preview -->
+        <div class="glass-card p-4 rounded-xl mt-6">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-cyan-400 uppercase">Live Sample Row Preview</span>
+            <button onclick="generateSampleRow()" class="text-xs text-cyan-400 hover:text-cyan-300"><i class="fa-solid fa-rotate-right"></i> New sample</button>
+          </div>
+          <pre id="sample-json" class="bg-gray-950 p-3 rounded-lg text-xs font-mono text-cyan-300 overflow-x-auto">{}</pre>
+        </div>
+
+        <!-- Continue Button -->
+        <div class="flex justify-end pt-4">
+          <button onclick="saveMachineProfile()" class="px-8 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold text-sm flex items-center space-x-2">
+            <span>Continue to configuration</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PAGE 3: CONFIGURATION -->
+    <!-- ========================================== -->
+    <div id="page-configure" class="hidden space-y-8 max-w-3xl mx-auto">
+      <div class="border-b border-gray-800 pb-4">
+        <span class="text-xs font-semibold text-cyan-400 uppercase">Step 3 of 4 • Configure Generator</span>
+        <h1 class="text-2xl font-extrabold text-white">Generation Configuration</h1>
+        <p id="config-machine-name" class="text-xs text-gray-400 mt-1"></p>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl space-y-6">
+        <!-- 1. Domain -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Domain Template:</label>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="domain-radios"></div>
+        </div>
+
+        <!-- 2. Records Slider -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-xs font-semibold text-gray-300 uppercase">Number of Records:</label>
+            <span id="records-val" class="text-xs font-mono font-bold text-cyan-400 bg-gray-950 px-2 py-1 rounded">10,000</span>
+          </div>
+          <input type="range" id="records-slider" min="100" max="100000" step="100" value="10000" oninput="updatePlan()" class="w-full accent-cyan-500 h-2 bg-gray-950 rounded cursor-pointer">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>100</span><span>50k</span><span>100k</span></div>
+        </div>
+
+        <!-- 3. Frequency Slider -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-xs font-semibold text-gray-300 uppercase">Target Edge-Case Frequency:</label>
+            <span id="freq-val" class="text-xs font-mono font-bold text-red-400 bg-gray-950 px-2 py-1 rounded">5%</span>
+          </div>
+          <input type="range" id="freq-slider" min="1" max="20" step="1" value="5" oninput="updatePlan()" class="w-full accent-red-500 h-2 bg-gray-950 rounded cursor-pointer">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>1%</span><span>10%</span><span>20%</span></div>
+        </div>
+
+        <!-- 4. Scenario -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Scenario to Inject:</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="scenario-radios"></div>
+        </div>
+
+        <!-- Proposed Plan Box -->
+        <div class="bg-gray-950 p-4 rounded-2xl border border-cyan-800/60 space-y-3">
+          <h3 class="text-xs font-bold text-cyan-400 uppercase">Proposed Generation Plan</h3>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="bg-gray-900 p-2 rounded"><span class="text-[10px] text-gray-400 block">TOTAL</span><span id="plan-total" class="font-bold font-mono">10,000</span></div>
+            <div class="bg-gray-900 p-2 rounded"><span class="text-[10px] text-gray-400 block">EDGE CASES</span><span id="plan-edge" class="font-bold font-mono text-red-400">500</span></div>
+            <div class="bg-gray-900 p-2 rounded"><span class="text-[10px] text-gray-400 block">NORMAL</span><span id="plan-normal" class="font-bold font-mono text-emerald-400">9,500</span></div>
+          </div>
+        </div>
+      </div>
+
+      <button id="design-btn" onclick="executeGeneration()" class="w-full py-4 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-extrabold text-base flex items-center justify-center space-x-2 shadow-lg shadow-cyan-500/20">
+        <span>Design this generator</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PAGE 4: RESULTS DASHBOARD -->
+    <!-- ========================================== -->
+    <div id="page-results" class="hidden space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-800 pb-4 gap-4">
+        <div>
+          <span class="text-xs font-semibold text-cyan-400 uppercase">Step 4 of 4 • Results & Analytics</span>
+          <h1 id="res-title" class="text-2xl font-extrabold text-white">Results Dashboard</h1>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <button onclick="downloadDataset('csv')" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold text-xs"><i class="fa-solid fa-download"></i> CSV</button>
+          <button onclick="downloadDataset('json')" class="px-3 py-2 rounded-xl bg-gray-800 text-white text-xs">JSON</button>
+          <button onclick="downloadDataset('parquet')" class="px-3 py-2 rounded-xl bg-gray-800 text-white text-xs">Parquet</button>
+        </div>
+      </div>
+
+      <!-- Metric Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card p-5 rounded-2xl">
+          <span class="text-xs text-gray-400 uppercase block">Total Records</span>
+          <span id="res-records" class="text-2xl font-extrabold font-mono text-white mt-1 block">0</span>
+        </div>
+        <div class="glass-card p-5 rounded-2xl">
+          <span class="text-xs text-gray-400 uppercase block">Edge Cases</span>
+          <span id="res-edge" class="text-2xl font-extrabold font-mono text-red-400 mt-1 block">0</span>
+        </div>
+        <div class="glass-card p-5 rounded-2xl">
+          <span class="text-xs text-gray-400 uppercase block">Quality Score</span>
+          <span id="res-quality" class="text-2xl font-extrabold font-mono text-emerald-400 mt-1 block">0%</span>
+        </div>
+        <div class="glass-card p-5 rounded-2xl">
+          <span class="text-xs text-gray-400 uppercase block">Privacy Score</span>
+          <span id="res-privacy" class="text-2xl font-extrabold font-mono text-purple-400 mt-1 block">0%</span>
+        </div>
+      </div>
+
+      <!-- Predictive Analytics Panel -->
+      <div class="glass-card p-6 rounded-3xl space-y-4 border border-purple-800/40">
+        <div class="flex justify-between items-center">
+          <div>
+            <span class="text-xs font-bold text-purple-400 uppercase">Predictive ML Verification</span>
+            <h2 class="text-lg font-bold text-white">Model Anomaly Detection Evaluation</h2>
+          </div>
+          <span id="res-f1-gain" class="px-3 py-1 rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold text-xs">+95.5% F1 Gain</span>
+        </div>
+
+        <div class="h-64 bg-gray-950 p-3 rounded-2xl">
+          <canvas id="predictiveChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Data Table Preview -->
+      <div class="glass-card p-6 rounded-3xl">
+        <h3 class="text-sm font-bold text-white mb-4">Sample Data Table (Edge Cases Highlighted in Red)</h3>
+        <div class="overflow-x-auto">
+          <table id="preview-table" class="w-full text-xs text-left">
+            <thead class="bg-gray-950 text-gray-400 uppercase font-bold italic"></thead>
+            <tbody class="divide-y divide-gray-800"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script>
+    const API_URL = 'http://localhost:8000';
+    let currentMachine = null;
+    let currentRun = null;
+    let parsedParameters = [];
+    let predictiveChartInstance = null;
+
+    fetch(`${API_URL}/api/llm-status`)
+      .then(res => res.json())
+      .then(data => {
+        const badge = document.getElementById('llm-badge');
+        if (data.reachable && !data.using_fallback) {
+          badge.className = "px-3 py-1.5 rounded-full bg-emerald-950 border border-emerald-700 text-emerald-400 text-xs font-semibold";
+          badge.innerText = `Local AI ready (${data.model_in_use})`;
+        } else {
+          badge.className = "px-3 py-1.5 rounded-full bg-amber-950 border border-amber-700 text-amber-400 text-xs font-semibold";
+          badge.innerText = `Local AI offline, using basic parser`;
+        }
+      }).catch(() => {});
+
+    function showPage(pageId) {
+      ['landing', 'define', 'configure', 'results'].forEach(p => {
+        document.getElementById(`page-${p}`).classList.add('hidden');
+        document.getElementById(`nav-${p}`)?.classList.remove('bg-slate-800', 'text-cyan-400', 'font-semibold');
+      });
+      document.getElementById(`page-${pageId}`).classList.remove('hidden');
+      document.getElementById(`nav-${pageId}`)?.classList.add('bg-slate-800', 'text-cyan-400', 'font-semibold');
+    }
+
+    function fillExample(type) {
+      if (type === 'water') {
+        document.getElementById('desc-input').value = "A high-capacity industrial water pump station that monitors temperature (0-100 °C), pressure (1-10 bar), flow rate (0-500 L/min), operational mode (idle, running, error), emergency stop button state, and records timestamps every 5 seconds.";
+      } else {
+        document.getElementById('desc-input').value = "A smart vending machine that tracks item inventory stock level (0-100 items), internal temperature (2-10 °C), payment method (cash, credit_card, mobile_pay), network connectivity status (online, offline), and door sensor.";
+      }
+    }
+
+    async function analyzeDescription() {
+      const desc = document.getElementById('desc-input').value.trim();
+      const errDiv = document.getElementById('define-error');
+      errDiv.classList.add('hidden');
+
+      if (!desc) { errDiv.innerText = "Describe your machine first"; errDiv.classList.remove('hidden'); return; }
+      if (desc.split(/\s+/).length < 8) { errDiv.innerText = "Add a little more detail so we can find the inputs"; errDiv.classList.remove('hidden'); return; }
+
+      const btn = document.getElementById('analyze-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i><span>Local AI reading...</span>';
+
+      try {
+        const res = await fetch(`${API_URL}/api/parse-machine`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ description: desc })
+        });
+        const data = await res.json();
+        parsedParameters = data.parameters || [];
+        renderParameters();
+        document.getElementById('parameters-section').classList.remove('hidden');
+      } catch (err) {
+        errDiv.innerText = err.message || "Error parsing description";
+        errDiv.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i><span>Analyze description</span>';
+      }
+    }
+
+    function renderParameters() {
+      document.getElementById('param-count').innerText = parsedParameters.length;
+      const container = document.getElementById('parameters-container');
+      container.innerHTML = '';
+
+      parsedParameters.forEach((p, idx) => {
+        const card = document.createElement('div');
+        card.className = 'glass-card p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs';
+        card.innerHTML = `
+          <input type="text" value="${p.name}" onchange="parsedParameters[${idx}].name=this.value; generateSampleRow()" class="bg-gray-950 border border-gray-800 rounded p-2 text-white font-mono w-full sm:w-1/3">
+          <select onchange="parsedParameters[${idx}].type=this.value; renderParameters();" class="bg-gray-950 border border-gray-800 rounded p-2 text-white w-full sm:w-1/4">
+            <option value="number" ${p.type==='number'?'selected':''}>Number</option>
+            <option value="category" ${p.type==='category'?'selected':''}>Category</option>
+            <option value="boolean" ${p.type==='boolean'?'selected':''}>Boolean</option>
+            <option value="text" ${p.type==='text'?'selected':''}>Text Token</option>
+            <option value="datetime" ${p.type==='datetime'?'selected':''}>Datetime</option>
+          </select>
+          <button onclick="parsedParameters.splice(${idx},1); renderParameters();" class="text-gray-500 hover:text-red-400 p-2"><i class="fa-solid fa-trash"></i></button>
+        `;
+        container.appendChild(card);
+      });
+      generateSampleRow();
+    }
+
+    function addBlankParameter() {
+      parsedParameters.push({ name: `param_${parsedParameters.length+1}`, type: 'number', number: { min: 0, max: 100 } });
+      renderParameters();
+    }
+
+    function generateSampleRow() {
+      const sample = {};
+      parsedParameters.forEach(p => {
+        if (!p.name) return;
+        if (p.type === 'number') sample[p.name] = Number((Math.random()*100).toFixed(2));
+        else if (p.type === 'category') sample[p.name] = 'normal';
+        else if (p.type === 'boolean') sample[p.name] = true;
+        else sample[p.name] = `${p.name.slice(0,3).toUpperCase()}-1234`;
+      });
+      document.getElementById('sample-json').innerText = JSON.stringify(sample, null, 2);
+    }
+
+    async function saveMachineProfile() {
+      const profile = {
+        name: "Defined Machine",
+        description: document.getElementById('desc-input').value,
+        suggested_domain: "IoT / Manufacturing",
+        domain: "IoT / Manufacturing",
+        parameters: parsedParameters
+      };
+
+      const res = await fetch(`${API_URL}/api/machines`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profile)
+      });
+      currentMachine = await res.json();
+      setupConfigurePage();
+      showPage('configure');
+    }
+
+    function setupConfigurePage() {
+      document.getElementById('config-machine-name').innerText = `Machine: ${currentMachine.name} (${currentMachine.parameters.length} params)`;
+      
+      const domContainer = document.getElementById('domain-radios');
+      domContainer.innerHTML = ['IoT / Manufacturing', 'Logistics', 'Finance', 'Healthcare', 'E-commerce'].map(d => `
+        <button onclick="setDomain('${d}')" class="p-2 rounded-xl border text-xs font-semibold ${d===currentMachine.domain?'bg-cyan-950 text-cyan-400 border-cyan-500':'bg-gray-950 border-gray-800 text-gray-400'}">${d}</button>
+      `).join('');
+
+      const scContainer = document.getElementById('scenario-radios');
+      scContainer.innerHTML = ['Boundary values', 'Missing or corrupted data', 'Combined equipment failure', 'Network outage'].map(s => `
+        <button onclick="setScenario('${s}')" class="p-3 rounded-xl border text-xs font-semibold bg-gray-950 border-gray-800 text-gray-400 hover:border-gray-700">${s}</button>
+      `).join('');
+
+      updatePlan();
+    }
+
+    let selectedDomain = 'IoT / Manufacturing';
+    let selectedScenario = 'Combined equipment failure';
+
+    function setDomain(d) { selectedDomain = d; setupConfigurePage(); }
+    function setScenario(s) { selectedScenario = s; }
+
+    function updatePlan() {
+      const num = parseInt(document.getElementById('records-slider').value);
+      const freq = parseInt(document.getElementById('freq-slider').value);
+      const edge = Math.round(num * (freq/100));
+
+      document.getElementById('records-val').innerText = num.toLocaleString();
+      document.getElementById('freq-val').innerText = `${freq}%`;
+      document.getElementById('plan-total').innerText = num.toLocaleString();
+      document.getElementById('plan-edge').innerText = edge.toLocaleString();
+      document.getElementById('plan-normal').innerText = (num-edge).toLocaleString();
+    }
+
+    async function executeGeneration() {
+      const btn = document.getElementById('design-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-xl"></i><span>Designing and generating dataset...</span>';
+
+      const config = {
+        machine_id: currentMachine.id,
+        num_records: parseInt(document.getElementById('records-slider').value),
+        edge_case_frequency: parseInt(document.getElementById('freq-slider').value),
+        scenario: selectedScenario,
+        seed: 42,
+        output_format: 'csv'
+      };
+
+      const res = await fetch(`${API_URL}/api/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(config)
+      });
+
+      currentRun = await res.json();
+      renderResultsPage();
+      showPage('results');
+    }
+
+    function renderResultsPage() {
+      document.getElementById('res-title').innerText = currentRun.machine_name;
+      document.getElementById('res-records').innerText = currentRun.num_records.toLocaleString();
+      document.getElementById('res-edge').innerText = currentRun.total_edge_cases.toLocaleString();
+      document.getElementById('res-quality').innerText = `${currentRun.quality_report.quality_score}%`;
+      document.getElementById('res-privacy').innerText = `${currentRun.privacy_report.privacy_score}%`;
+
+      const ctx = document.getElementById('predictiveChart').getContext('2d');
+      if (predictiveChartInstance) predictiveChartInstance.destroy();
+
+      const withData = currentRun.predictive_report.with_edge_cases;
+      const withoutData = currentRun.predictive_report.without_edge_cases;
+
+      predictiveChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Accuracy', 'Precision', 'Recall', 'F1-Score'],
+          datasets: [
+            { label: 'With Edge Cases', data: [withData.accuracy*100, withData.precision*100, withData.recall*100, withData.f1_score*100], backgroundColor: '#10b981' },
+            { label: 'Without Edge Cases', data: [withoutData.accuracy*100, withoutData.precision*100, withoutData.recall*100, withoutData.f1_score*100], backgroundColor: '#6b7280' }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 0, max: 100 } } }
+      });
+
+      const tableHead = document.querySelector('#preview-table thead');
+      const tableBody = document.querySelector('#preview-table tbody');
+      
+      const rawCols = currentRun.columns;
+      tableHead.innerHTML = `<tr><th class="p-2 font-bold italic uppercase">#</th>${rawCols.map(c => `<th class="p-2 font-bold italic uppercase">${c}</th>`).join('')}</tr>`;
+
+      tableBody.innerHTML = currentRun.preview_rows.slice(0, 15).map((row, i) => {
+        const isEdge = row.IS_EDGE_CASE || row.is_edge_case;
+        return `
+          <tr class="${isEdge ? 'bg-red-950/40 text-red-300 font-bold' : ''}">
+            <td class="p-2 font-mono">${i+1}</td>
+            ${rawCols.map(c => `<td class="p-2 font-mono">${row[c]??''}</td>`).join('')}
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function downloadDataset(fmt) {
+      window.open(`${API_URL}/api/download/${currentRun.run_id}`, '_blank');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "badge": "New",
+    "title": "Local Ollama LLM Machine Parsing",
+    "description": "Extract parameters from text descriptions using local offline Ollama model qwen2.5-coder:7b with structured JSON schemas.",
+    "date": "2026-10-05"
+  },
+  {
+    "id": "2",
+    "badge": "Improved",
+    "title": "Schema-Agnostic Edge Case Injection",
+    "description": "Automatically produce rare boundary values, corruptions, equipment failures, and network outages on any user-defined parameter schema.",
+    "date": "2026-10-04"
+  },
+  {
+    "id": "3",
+    "badge": "New",
+    "title": "Predictive ML Failure Model Evaluation",
+    "description": "Quantify dataset value by training RandomForest classifiers WITH vs WITHOUT edge cases to prove anomaly detection gain.",
+    "date": "2026-10-04"
+  }
+]

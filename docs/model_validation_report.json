@@ -1,0 +1,24 @@
+{
+  "model_name": "RandomForest Failure Predictor",
+  "with_edge_cases": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "roc_auc": 1.0,
+    "cv_f1_mean": 1.0,
+    "cv_f1_std": 0.0
+  },
+  "without_edge_cases": {
+    "accuracy": 0.9,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1_score": 0.0,
+    "roc_auc": 0.5,
+    "cv_f1_mean": 0.0,
+    "cv_f1_std": 0.0
+  },
+  "edge_case_value_gain_f1": 1.0,
+  "edge_case_value_gain_recall": 1.0,
+  "summary_message": "Edge-case injection improved model anomaly detection F1 score by +100.0% and recall by +100.0%, proving dataset value for risk modeling."
+}

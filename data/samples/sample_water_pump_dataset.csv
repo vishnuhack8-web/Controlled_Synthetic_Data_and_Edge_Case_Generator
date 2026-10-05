@@ -1,0 +1,7 @@
+timestamp,temperature,pressure,flow_rate,operating_mode,emergency_stop_state,is_edge_case,edge_case_type
+2026-01-01 00:00:00,42.51,5.21,245.1,running,False,0,Normal
+2026-01-01 00:00:05,43.12,5.19,248.5,running,False,0,Normal
+2026-01-01 00:00:10,41.98,5.25,242.0,running,False,0,Normal
+2026-01-01 00:00:15,44.05,5.18,251.3,running,False,0,Normal
+2026-01-01 00:00:20,98.50,0.50,10.0,error,True,1,Combined equipment failure
+2026-01-01 00:00:25,42.30,5.22,246.0,running,False,0,Normal

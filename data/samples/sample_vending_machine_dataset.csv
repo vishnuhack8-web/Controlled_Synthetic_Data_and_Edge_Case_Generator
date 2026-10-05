@@ -1,0 +1,6 @@
+timestamp,inventory_stock,internal_temp,payment_method,network_status,door_sensor,is_edge_case,edge_case_type
+2026-01-01 00:00:00,85,4.2,credit_card,online,False,0,Normal
+2026-01-01 00:00:05,84,4.3,mobile_pay,online,False,0,Normal
+2026-01-01 00:00:10,84,4.1,cash,online,False,0,Normal
+2026-01-01 00:00:15,0,15.5,credit_card,offline,True,1,Boundary values
+2026-01-01 00:00:20,83,4.2,card,online,False,0,Normal
